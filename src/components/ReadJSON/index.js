@@ -13,25 +13,26 @@ class ReadJSON extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        console.log(typeof(responseJson));
-        
         this.setState({ 
-          dataSource: responseJson.charities,
+          dataSource: responseJson.matches,
         });
       })
       .catch((error) => {
         console.error(error);
       });
-  }
-
-  render() {
+      
+    }
+    
+    render() {
+      console.log(this.state.dataSource)
     return(
+      
       <div>
           {this.state.dataSource.map(function(item, i){
             return (
-              <div>
-                <p key={i}>Name: {item.name}</p>
-                <p key={i}>EIN: {item.ein}</p>
+              <div key={i}>
+                <p>Name: {item.name}</p>
+                <p>EIN: {item.ein}</p>
               </div>
             );
           })}
