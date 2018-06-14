@@ -9,12 +9,12 @@ class ReadJSON extends Component {
   }
 
   componentDidMount(){
-    return fetch('https://demo.open990.com/advanced_search?ein=411357750')
+    return fetch('https://s3.amazonaws.com/irs-form-990/index_2017.json')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
         this.setState({ 
-          dataSource: responseJson.matches,
+          dataSource: responseJson.Filings2017[0],
         });
       })
       .catch((error) => {
@@ -24,18 +24,13 @@ class ReadJSON extends Component {
     }
     
     render() {
-      console.log(this.state.dataSource)
+      let item = this.state.dataSource;
     return(
-      
       <div>
-          {this.state.dataSource.map(function(item, i){
-            return (
-              <div key={i}>
-                <p>Name: {item.name}</p>
-                <p>EIN: {item.ein}</p>
-              </div>
-            );
-          })}
+        <div >
+          <p>Name: {item.OrganizationName}</p>
+          <p>EIN: {item.EIN}</p>
+        </div>
       </div>
     );
   }
